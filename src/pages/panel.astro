@@ -1,0 +1,36 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import "@/styles/global.css";
+---
+
+<Layout>
+	<section class="flex min-h-full flex-col items-center justify-center px-6 py-16 text-center">
+		<div class="max-w-lg space-y-6 rounded-2xl border border-cip-gray-light bg-white/80 p-10 shadow-lg shadow-cip-gray/10">
+			<div>
+				<p class="text-sm font-semibold uppercase tracking-widest text-cip-gray">Panel temporal</p>
+				<h1 class="mt-4 text-3xl font-bold tracking-tight text-cip-black">Bienvenido al portal de eventos</h1>
+			</div>
+			<p class="text-base text-cip-gray">
+				Este panel es provisional mientras se conectan las pantallas definitivas. Ya puedes usar tu sesión para navegar el
+				sitio o regresar al inicio.
+			</p>
+			<div class="flex flex-wrap items-center justify-center gap-4">
+				<a
+					href="/"
+					class="rounded-md bg-cip-red px-4 py-2 text-sm font-semibold text-white hover:bg-cip-red-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cip-red-dark"
+				>
+					Ir al inicio
+				</a>
+				<button
+					type="button"
+					class="rounded-md border border-cip-gray-light px-4 py-2 text-sm font-semibold text-cip-black hover:bg-cip-gray-light/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cip-gray-light"
+					onclick="localStorage.removeItem('cipAccessToken'); localStorage.removeItem('cipRefreshToken'); window.location.href = '/login';"
+				>
+					Cerrar sesión
+				</button>
+			</div>
+		</div>
+	</section>
+
+	<script type="module" src="/src/scripts/ensure-auth.ts" data-ensure-auth data-redirect-path="/login"></script>
+</Layout>

@@ -1,0 +1,95 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import CIPLogo from "@/assets/cip.svg";
+import "@/styles/global.css";
+
+const redirectPath = "/panel";
+---
+
+<Layout>
+	<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+		<div class="sm:mx-auto sm:w-full sm:max-w-sm">
+			<img
+				src={CIPLogo.src}
+				alt="Colegio de Ingenieros del Perú"
+				class="mx-auto h-16 w-auto"
+			/>
+			<h1 class="mt-10 text-center text-2xl/8 font-bold tracking-tight text-cip-black">
+				Inicia sesión en tu cuenta
+			</h1>
+		</div>
+
+		<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+			<form id="login-form" class="space-y-6" novalidate>
+				<div>
+					<label for="email" class="block text-sm/6 font-medium text-cip-gray">
+						Correo electrónico
+					</label>
+					<div class="mt-2">
+						<input
+							id="email"
+							type="email"
+							name="email"
+							required
+							autocomplete="email"
+							aria-invalid="false"
+							class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-cip-gray outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cip-gray-light sm:text-sm/6"
+						/>
+					</div>
+				</div>
+
+				<div>
+					<div class="flex items-center justify-between">
+						<label for="password" class="block text-sm/6 font-medium text-cip-gray">
+							Contraseña
+						</label>
+						<div class="text-sm">
+							<a href="#" class="font-semibold text-cip-red hover:text-cip-red-dark">¿Olvidaste tu contraseña?</a>
+						</div>
+					</div>
+					<div class="mt-2">
+						<input
+							id="password"
+							type="password"
+							name="password"
+							required
+							autocomplete="current-password"
+							aria-invalid="false"
+							class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-cip-gray outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cip-gray-light sm:text-sm/6"
+						/>
+					</div>
+				</div>
+
+				<div>
+					<button
+						id="login-submit"
+						type="submit"
+						aria-busy="false"
+						aria-disabled="false"
+						class="flex w-full justify-center rounded-md bg-cip-red px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-cip-red-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cip-red-dark"
+					>
+						Iniciar sesión
+					</button>
+				</div>
+			</form>
+
+			<p
+				id="login-error"
+				class="mt-6 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-center text-sm text-red-700"
+				hidden
+				role="alert"
+				aria-live="assertive"
+			>
+				<span class="sr-only">Estado del inicio de sesión:</span>
+				<span data-error-text>Sin mensajes nuevos.</span>
+			</p>
+
+			<p class="mt-10 text-center text-sm/6 text-gray-500">
+				¿No eres miembro?
+				<a href="#" class="font-semibold text-cip-red hover:text-cip-red-dark">Solicita acceso al sistema</a>
+			</p>
+		</div>
+	</div>
+
+	<script type="module" src="/src/scripts/login.ts" data-login-script data-redirect-path={redirectPath}></script>
+</Layout>

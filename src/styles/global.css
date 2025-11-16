@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+	--color-cip-red: #e31e24;
+	--color-cip-black: #2a2a29;
+	--color-cip-gold: #d7b560;
+	--color-cip-gray-light: #f0e4cc;
+	--color-cip-gray: #686564;
+	--color-cip-red-dark: #6c0e10;
+}
