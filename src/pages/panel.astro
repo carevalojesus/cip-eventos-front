@@ -1,230 +1,57 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import CIPLogo from "@/assets/cip.svg";
-import "@/styles/global.css";
-import {
-	Calendar,
-	FileText,
-	Folder,
-	Home,
-	LogOut,
-	Menu,
-	PieChart,
-	UserRound,
-	Users,
-	X,
-} from "@lucide/astro";
-
-const navigation = [
-	{ name: "Panel", href: "/panel", icon: Home, current: true },
-	{ name: "Equipo", href: "#", icon: Users, current: false },
-	{ name: "Proyectos", href: "#", icon: Folder, current: false },
-	{ name: "Calendario", href: "#", icon: Calendar, current: false },
-	{ name: "Documentos", href: "#", icon: FileText, current: false },
-	{ name: "Reportes", href: "#", icon: PieChart, current: false },
-];
-
-const teamLinks = [
-	{ name: "CIP Norte", initials: "CN" },
-	{ name: "CIP Centro", initials: "CC" },
-	{ name: "CIP Sur", initials: "CS" },
-];
+import PanelLayout from "@/layouts/PanelLayout.astro";
+import { FileText, LogOut, UserRound } from "@lucide/astro";
 ---
 
-<Layout>
-	<Fragment slot="head">
-		<script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
-	</Fragment>
-
-	<el-dialog>
-		<dialog id="sidebar" class="backdrop:bg-transparent lg:hidden">
-			<el-dialog-backdrop class="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-closed:opacity-0"></el-dialog-backdrop>
-
-			<div tabindex="0" class="fixed inset-0 flex focus:outline-none">
-				<el-dialog-panel class="group/dialog-panel relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full">
-					<div class="absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out group-data-closed/dialog-panel:opacity-0">
-						<button type="button" command="close" commandfor="sidebar" class="-m-2.5 p-2.5">
-							<span class="sr-only">Cerrar menú</span>
-							<X class="size-6 text-white" aria-hidden="true" />
-						</button>
-					</div>
-
-					<div class="relative flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10">
-						<div class="relative flex h-16 shrink-0 items-center">
-							<img src={CIPLogo.src} alt="Colegio de Ingenieros del Perú" class="h-8 w-auto" />
-						</div>
-						<nav class="flex flex-1 flex-col">
-							<ul role="list" class="flex flex-1 flex-col gap-y-7">
-								<li>
-									<ul role="list" class="-mx-2 space-y-1">
-										{navigation.map((item) => (
-											<li>
-												<a
-													href={item.href}
-													class={`group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold ${item.current ? "bg-white/5 text-white" : "text-gray-400 hover:bg-white/5 hover:text-white"}`}
-												>
-													<item.icon class="size-6 shrink-0" aria-hidden="true" />
-													<span>{item.name}</span>
-												</a>
-											</li>
-										))}
-									</ul>
-								</li>
-								<li>
-									<div class="text-xs/6 font-semibold text-gray-400">Tus equipos</div>
-									<ul role="list" class="-mx-2 mt-2 space-y-1">
-										{teamLinks.map((team) => (
-											<li>
-												<a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-white/5 hover:text-white">
-													<span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:border-white/20 group-hover:text-white">
-														{team.initials}
-													</span>
-													<span class="truncate">{team.name}</span>
-												</a>
-											</li>
-										))}
-									</ul>
-								</li>
-								<li class="-mx-6 mt-auto">
-									<div class="flex items-center gap-x-4 px-6 py-4 text-sm font-semibold text-white">
-										<div class="relative">
-											<img data-panel-user-avatar class="size-10 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10 hidden" alt="Foto de perfil" />
-											<span data-panel-user-initials class="flex size-10 items-center justify-center rounded-full bg-cip-gray text-sm font-bold text-white">US</span>
-										</div>
-										<div class="flex flex-col text-left">
-											<span class="text-base" data-panel-user-name>Usuario CIP</span>
-											<span class="text-xs text-gray-400" data-panel-user-email>Sin correo disponible</span>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</nav>
-					</div>
-				</el-dialog-panel>
+<PanelLayout pageTitle="Panel de eventos">
+	<section class="rounded-2xl bg-white/90 p-6 shadow-lg shadow-cip-gray/10">
+		<div class="flex flex-wrap items-center justify-between gap-4">
+			<div>
+				<p class="text-sm font-semibold uppercase tracking-widest text-cip-gray">Panel de eventos</p>
+				<h1 class="mt-2 text-3xl font-bold tracking-tight text-cip-black">
+					Bienvenido,
+					<span class="text-cip-red" data-panel-user-name>Usuario CIP</span>
+				</h1>
+				<p class="mt-1 text-base text-cip-gray">
+					Gestiona tus actividades, participantes y reportes desde un solo lugar.
+				</p>
 			</div>
-		</dialog>
-	</el-dialog>
-
-	<div class="hidden bg-gray-900 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-		<div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6">
-			<div class="flex h-16 shrink-0 items-center">
-				<img src={CIPLogo.src} alt="Colegio de Ingenieros del Perú" class="h-10 w-auto" />
-			</div>
-			<nav class="flex flex-1 flex-col">
-				<ul role="list" class="flex flex-1 flex-col gap-y-7">
-					<li>
-						<ul role="list" class="-mx-2 space-y-1">
-							{navigation.map((item) => (
-								<li>
-									<a
-										href={item.href}
-										class={`group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold ${item.current ? "bg-white/5 text-white" : "text-gray-400 hover:bg-white/5 hover:text-white"}`}
-									>
-										<item.icon class="size-6 shrink-0" aria-hidden="true" />
-										<span>{item.name}</span>
-									</a>
-								</li>
-							))}
-						</ul>
-					</li>
-					<li>
-						<div class="text-xs/6 font-semibold text-gray-400">Tus equipos</div>
-						<ul role="list" class="-mx-2 mt-2 space-y-1">
-							{teamLinks.map((team) => (
-								<li>
-									<a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-white/5 hover:text-white">
-										<span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
-											{team.initials}
-										</span>
-										<span class="truncate">{team.name}</span>
-									</a>
-								</li>
-							))}
-						</ul>
-					</li>
-					<li class="-mx-6 mt-auto">
-						<div class="flex items-center gap-x-4 px-6 py-4 text-sm font-semibold text-white">
-							<div class="relative">
-								<img data-panel-user-avatar class="size-10 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10 hidden" alt="Foto de perfil" />
-								<span data-panel-user-initials class="flex size-10 items-center justify-center rounded-full bg-cip-gray text-sm font-bold text-white">US</span>
-							</div>
-							<div class="flex flex-col text-left">
-								<span class="text-base" data-panel-user-name>Usuario CIP</span>
-								<span class="text-xs text-gray-400" data-panel-user-email>Sin correo disponible</span>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</nav>
+			<button
+				type="button"
+				class="inline-flex items-center gap-2 rounded-md border border-cip-gray-light px-4 py-2 text-sm font-semibold text-cip-black hover:bg-cip-gray-light/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cip-gray-light"
+				onclick="localStorage.removeItem('cipAccessToken'); localStorage.removeItem('cipRefreshToken'); window.location.href = '/login';"
+			>
+				<LogOut class="size-4" aria-hidden="true" />
+				Cerrar sesión
+			</button>
 		</div>
-	</div>
 
-	<div class="sticky top-0 z-40 flex items-center gap-x-6 bg-gray-900 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
-		<button type="button" command="show-modal" commandfor="sidebar" class="-m-2.5 p-2.5 text-gray-400 hover:text-white lg:hidden">
-			<span class="sr-only">Abrir menú</span>
-			<Menu class="size-6" aria-hidden="true" />
-		</button>
-		<div class="flex-1 text-sm/6 font-semibold text-white">Panel</div>
-		<div class="relative">
-			<img data-panel-user-avatar class="size-8 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10 hidden" alt="Foto de perfil" />
-			<span data-panel-user-initials class="flex size-8 items-center justify-center rounded-full bg-cip-gray text-xs font-bold text-white">US</span>
-		</div>
-	</div>
-
-	<main class="min-h-screen bg-gray-50 py-10 lg:pl-72">
-		<div class="px-4 sm:px-6 lg:px-8">
-			<section class="rounded-2xl bg-white/90 p-6 shadow-lg shadow-cip-gray/10">
-				<div class="flex flex-wrap items-center justify-between gap-4">
+		<div class="mt-6 grid gap-6 md:grid-cols-2">
+			<article class="rounded-xl border border-cip-gray-light/70 bg-white p-5">
+				<header class="flex items-center gap-3 text-cip-black">
+					<UserRound class="size-5" aria-hidden="true" />
 					<div>
-						<p class="text-sm font-semibold uppercase tracking-widest text-cip-gray">Panel de eventos</p>
-						<h1 class="mt-2 text-3xl font-bold tracking-tight text-cip-black">
-							Bienvenido,
-							<span class="text-cip-red" data-panel-user-name>Usuario CIP</span>
-						</h1>
-						<p class="mt-1 text-base text-cip-gray">
-							Gestiona tus actividades, participantes y reportes desde un solo lugar.
-						</p>
+						<p class="text-sm font-semibold uppercase tracking-wide text-cip-gray">Usuario</p>
+						<p class="text-lg font-bold" data-panel-user-name>Usuario CIP</p>
 					</div>
-					<button
-						type="button"
-						class="inline-flex items-center gap-2 rounded-md border border-cip-gray-light px-4 py-2 text-sm font-semibold text-cip-black hover:bg-cip-gray-light/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cip-gray-light"
-						onclick="localStorage.removeItem('cipAccessToken'); localStorage.removeItem('cipRefreshToken'); window.location.href = '/login';"
-					>
-						<LogOut class="size-4" aria-hidden="true" />
-						Cerrar sesión
-					</button>
-				</div>
+				</header>
+				<p class="mt-2 text-sm text-cip-gray">
+					Correo principal: <span class="font-semibold" data-panel-user-email>Sin correo disponible</span>
+				</p>
+			</article>
 
-				<div class="mt-6 grid gap-6 md:grid-cols-2">
-					<article class="rounded-xl border border-cip-gray-light/70 bg-white p-5">
-						<header class="flex items-center gap-3 text-cip-black">
-							<UserRound class="size-5" aria-hidden="true" />
-							<div>
-								<p class="text-sm font-semibold uppercase tracking-wide text-cip-gray">Usuario</p>
-								<p class="text-lg font-bold" data-panel-user-name>Usuario CIP</p>
-							</div>
-						</header>
-						<p class="mt-2 text-sm text-cip-gray">
-							Correo principal: <span class="font-semibold" data-panel-user-email>Sin correo disponible</span>
-						</p>
-					</article>
-
-					<article class="rounded-xl border border-cip-gray-light/70 bg-white p-5">
-						<header class="flex items-center gap-3 text-cip-black">
-							<FileText class="size-5" aria-hidden="true" />
-							<div>
-								<p class="text-sm font-semibold uppercase tracking-wide text-cip-gray">Próximos pasos</p>
-								<p class="text-lg font-bold">Configura tus eventos</p>
-							</div>
-						</header>
-						<p class="mt-2 text-sm text-cip-gray">
-							Este espacio mostrará información en tiempo real una vez que el backend exponga los datos necesarios.
-						</p>
-					</article>
-				</div>
-			</section>
+			<article class="rounded-xl border border-cip-gray-light/70 bg-white p-5">
+				<header class="flex items-center gap-3 text-cip-black">
+					<FileText class="size-5" aria-hidden="true" />
+					<div>
+						<p class="text-sm font-semibold uppercase tracking-wide text-cip-gray">Próximos pasos</p>
+						<p class="text-lg font-bold">Configura tus eventos</p>
+					</div>
+				</header>
+				<p class="mt-2 text-sm text-cip-gray">
+					Este espacio mostrará información en tiempo real una vez que el backend exponga los datos necesarios.
+				</p>
+			</article>
 		</div>
-	</main>
-
-	<script type="module" src="/src/scripts/panel.ts" data-panel-script></script>
-</Layout>
+	</section>
+</PanelLayout>
