@@ -16,6 +16,15 @@ type LoginResponse = {
 	refreshToken?: string;
 };
 
+export type UserProfile = {
+	id?: string;
+	name?: string;
+	fullName?: string;
+	email?: string;
+	avatarUrl?: string;
+	[key: string]: unknown;
+};
+
 const buildUrl = (path: string) => {
 	if (path.startsWith("http")) return path;
 	return `${API_BASE_URL}${path.startsWith("/") ? "" : "/"}${path}`;
@@ -98,15 +107,15 @@ export const login = async ({ email, password }: LoginCredentials) => {
 	return payload;
 };
 
-export const getProfile = async () => {
+export const getProfile = async (): Promise<UserProfile> => {
 	const response = await apiFetch("/auth/profile", {
 		method: "GET",
 	});
 	return response.json();
 };
 
-export const ensureAuthenticated = async ({ redirectTo = "/login" } = {}) => {
-	if (!isBrowser) return;
+export const ensureAuthenticated = async ({ redirectTo = "/login" } = {}): Promise<UserProfile | null> => {
+	if (!isBrowser) return null;
 	const redirect = () => {
 		clearTokens();
 		window.location.href = redirectTo;
@@ -115,12 +124,13 @@ export const ensureAuthenticated = async ({ redirectTo = "/login" } = {}) => {
 	const token = getAccessToken();
 	if (!token) {
 		redirect();
-		return;
+		return null;
 	}
 
 	try {
-		await getProfile();
+		return await getProfile();
 	} catch {
 		redirect();
+		return null;
 	}
 };

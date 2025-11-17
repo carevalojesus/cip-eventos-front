@@ -88,6 +88,6 @@ const initLogin = ({ redirectPath = "/panel" }: Options = {}) => {
 (() => {
 	if (typeof window === "undefined") return;
 	const scriptEl = document.querySelector<HTMLScriptElement>('script[data-login-script]');
-	const redirectPath = scriptEl?.dataset.redirectPath;
-	initLogin({ redirectPath });
+	const redirectPath = scriptEl?.dataset.redirectPath?.trim();
+	initLogin({ redirectPath: redirectPath || undefined });
 })();
