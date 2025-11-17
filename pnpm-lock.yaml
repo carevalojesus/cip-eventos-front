@@ -14,6 +14,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.1.17
         version: 4.1.17(vite@6.4.1(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2))
+      '@tailwindplus/elements':
+        specifier: ^1.0.18
+        version: 1.0.18
       astro:
         specifier: ^5.15.8
         version: 5.15.8(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.53.2)(typescript@5.9.3)
@@ -613,6 +616,9 @@ packages:
     resolution: {integrity: sha512-4+9w8ZHOiGnpcGI6z1TVVfWaX/koK7fKeSYF3qlYg2xpBtbteP2ddBxiarL+HVgfSJGeK5RIxRQmKm4rTJJAwA==}
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7
+
+  '@tailwindplus/elements@1.0.18':
+    resolution: {integrity: sha512-JvqwL+6LwDIxC5zV9kAcI1wttpkUhgkGr7bcuYGH7fxnmgvVJglBERqlgPGGDXWB+lpuFgjgkvtK3pMm/7MvTA==}
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
@@ -2104,6 +2110,8 @@ snapshots:
       '@tailwindcss/oxide': 4.1.17
       tailwindcss: 4.1.17
       vite: 6.4.1(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)
+
+  '@tailwindplus/elements@1.0.18': {}
 
   '@types/debug@4.1.12':
     dependencies:

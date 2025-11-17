@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import CIPLogo from "@/assets/cip.svg";
 import "@/styles/global.css";
+import "@tailwindplus/elements";
 import {
 	BadgeCheck,
 	Building2,
@@ -66,10 +67,6 @@ const navItems = navigation.map((item) => ({
 ---
 
 <Layout>
-	<Fragment slot="head">
-		<script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
-	</Fragment>
-
 	<el-dialog>
 		<dialog id="sidebar" class="backdrop:bg-transparent lg:hidden">
 			<el-dialog-backdrop class="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-closed:opacity-0"></el-dialog-backdrop>
