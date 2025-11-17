@@ -1,4 +1,5 @@
-import { ensureAuthenticated, type UserProfile } from "@/lib/auth-client";
+import { ensureAuthenticated } from "@/lib/auth-client";
+import { buildInitials, resolveAvatarUrl, textOrFallback } from "@/lib/profile-utils";
 
 type PanelElements = {
 	name?: NodeListOf<HTMLElement>;
@@ -20,43 +21,6 @@ const getElements = (): PanelElements => ({
 	initials: document.querySelectorAll<HTMLElement>(selectors.initials),
 	avatar: document.querySelectorAll<HTMLImageElement>(selectors.avatar),
 });
-
-const textOrFallback = (value: unknown, fallback: string) => {
-	return typeof value === "string" && value.trim().length > 0 ? value : fallback;
-};
-
-const resolveAvatarUrl = (profile: UserProfile) => {
-	const directValue =
-		profile.avatarUrl ??
-		// allow alternative property names that might come from la API
-		(profile as Record<string, unknown>).avatarURL ??
-		(profile as Record<string, unknown>).photoUrl ??
-		(profile as Record<string, unknown>).photo;
-
-	if (typeof directValue === "string" && directValue.trim().length > 0) {
-		return directValue;
-	}
-
-	const avatar = (profile as Record<string, unknown>).avatar;
-	if (avatar && typeof avatar === "object" && "url" in avatar) {
-		const value = (avatar as { url?: string }).url;
-		if (value && value.trim().length > 0) {
-			return value;
-		}
-	}
-
-	return null;
-};
-
-const buildInitials = (displayName: string) => {
-	return displayName
-		.split(/\s+/)
-		.filter(Boolean)
-		.slice(0, 2)
-		.map((chunk) => chunk.charAt(0).toUpperCase())
-		.join("")
-		|| "US";
-};
 
 const updateElements = (nodes: NodeListOf<HTMLElement> | undefined, value: string) => {
 	nodes?.forEach((node) => {
